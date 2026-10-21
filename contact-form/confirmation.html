@@ -1,0 +1,52 @@
+<!--
+  ==========================================================================
+  confirmation.html : the "thank you" page
+
+  This page is shown after contact.html has checked the form and found
+  every field valid. script.js redirects the browser here. It only displays
+  a message and a link back to the form. It does not check or store anything.
+
+  Styling comes from style.css, the same file used by contact.html.
+  ==========================================================================
+-->
+<!DOCTYPE html>
+<!-- lang="en" tells browsers and screen readers that the page is in English. -->
+<html lang="en">
+<head>
+  <!-- The character set. UTF-8 lets the page show letters such as accents correctly. -->
+  <meta charset="UTF-8">
+
+  <!-- Makes the page scale to the width of a phone or tablet screen. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- The text shown in the browser tab. -->
+  <title>Thank You</title>
+
+  <!-- Same font loading as contact.html. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- The shared stylesheet. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Same centred content width as the form page. -->
+  <main class="container">
+
+    <!-- The white card. The "confirmation" class centres the text inside it. -->
+    <section class="form-card confirmation">
+
+      <h1>Thank you</h1>
+
+      <p>Thank you for your message. We have received it and will get back to you as soon as we can.</p>
+
+      <!-- A link styled as a button. href="contact.html" takes the user back to
+           the form in the same folder. -->
+      <a href="contact.html" class="btn btn-primary btn-inline">Send another message</a>
+
+    </section>
+  </main>
+</body>
+</html>

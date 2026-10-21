@@ -1,0 +1,231 @@
+/*
+  ==========================================================================
+  style.css : the look of the contact form
+
+  Used by both contact.html and confirmation.html.
+
+  The file is arranged in this order:
+    1. Colour and font settings (:root)
+    2. Base page settings (body, container, card)
+    3. Headings and text
+    4. Form fields, hints, errors and focus styles
+    5. Buttons
+    6. Confirmation page
+    7. Small-screen (phone) adjustments
+
+  Each rule is written as: selector { property: value; }
+  - A selector such as .btn picks the elements with that class.
+  - A property such as color sets how they look.
+  - var(--navy) means "use the value stored in --navy" from section 1.
+  ==========================================================================
+*/
+
+/* ---- 1. Colours and fonts ----
+   :root is the top level of the page. Storing colours here means that if
+   a colour changes, you only need to edit it in one place. */
+:root {
+  --navy: #123869;        /* Headings, labels and primary buttons */
+  --teal: #0FAC8D;        /* Focus outlines and accents */
+  --light-grey: #F3F4F6;  /* Page background */
+  --white: #FFFFFF;       /* Form card and input backgrounds */
+  --text: #1F2937;        /* Main body text */
+  --muted: #4B5563;       /* Hints and introductory text */
+  --border: #9CA3AF;      /* Normal input border */
+  --error: #B42318;       /* Error messages and invalid input borders (not part of the brand palette) */
+}
+
+/* ---- 2. Base page settings ---- */
+
+/* Apply box-sizing to every element. This makes width and padding add up
+   predictably, so a box set to 100% wide does not spill over its container. */
+* {
+  box-sizing: border-box;
+}
+
+/* The whole page. */
+body {
+  margin: 0;                       /* Remove the browser's default outer gap */
+  font-family: "Archivo", Arial, Helvetica, sans-serif; /* Use Archivo, else the fallbacks */
+  font-size: 1rem;                 /* Base text size (1rem is usually 16px) */
+  line-height: 1.5;                /* Space between lines of text */
+  color: var(--text);
+  background-color: var(--light-grey);
+}
+
+/* Centres the content and limits its width, so lines stay readable on wide screens. */
+.container {
+  max-width: 640px;                /* Never wider than 640 pixels */
+  margin: 0 auto;                  /* Equal space left and right centres it */
+  padding: 40px 16px;              /* Space above/below, and a 16px gutter at the sides */
+}
+
+/* The white card that holds the form or the thank-you message. */
+.form-card {
+  background-color: var(--white);
+  border-radius: 8px;              /* Rounded corners */
+  padding: 32px;                   /* Space between the card edge and its contents */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* A faint shadow so the card stands out */
+}
+
+/* ---- 3. Headings and text ---- */
+
+h1 {
+  color: var(--navy);
+  font-size: 1.75rem;
+  margin: 0 0 8px;                 /* No space above, 8px below */
+}
+
+/* The introductory paragraph under the heading. */
+.intro {
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+/* The asterisk showing a required field. */
+.required {
+  color: var(--navy);
+}
+
+/* ---- 4. Form fields, hints, errors and focus styles ---- */
+
+/* Wraps one label, input, hint and error message. Adds space between fields. */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Field labels. display: block puts each label on its own line above its box. */
+label {
+  display: block;
+  font-weight: 600;                /* Semi-bold */
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+/* Text boxes and the message box. These rules apply to both. */
+input,
+textarea {
+  width: 100%;                     /* Fill the width of the form card */
+  padding: 12px;                   /* Space between the text and the border */
+  font: inherit;                   /* Use the same font as the rest of the page */
+  color: var(--text);
+  background-color: var(--white);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+}
+
+/* The message box can be dragged taller by the user, but not made narrower. */
+textarea {
+  resize: vertical;
+  min-height: 140px;               /* Starting height */
+}
+
+/* Focus styles. The focus is where the keyboard cursor sits, so it is important
+   that keyboard users can always see where they are. */
+input:focus,
+textarea:focus,
+.btn:focus-visible {
+  outline: 3px solid var(--teal);  /* A thick teal ring */
+  outline-offset: 2px;             /* A small gap between the box and the ring */
+}
+
+/* When a box has focus, its border also turns teal. */
+input:focus,
+textarea:focus {
+  border-color: var(--teal);
+}
+
+/* Added by script.js when a field fails validation. Overrides the normal border colour. */
+input.invalid,
+textarea.invalid {
+  border-color: var(--error);
+}
+
+/* Small grey hint text under a field. */
+.hint {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+/* Red error text under a field. script.js fills this in when a field is wrong. */
+.error-message {
+  color: var(--error);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 4px 0 0;
+}
+
+/* When an error box is empty (the field is fine), remove its spacing too. */
+.error-message:empty {
+  margin: 0;
+}
+
+/* Turns the character counter red when the message is too long. script.js adds this class. */
+.over-limit {
+  color: var(--error);
+  font-weight: 600;
+}
+
+/* ---- 5. Buttons ---- */
+
+/* Settings shared by every button and button-style link. */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;              /* Size of the button */
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;           /* Removes the underline from links styled as buttons */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;                 /* Shows a hand icon when the mouse is over it */
+}
+
+/* The main "Send message" button. Full width, navy background, white text. */
+.btn-primary {
+  display: block;
+  width: 100%;
+  background-color: var(--navy);
+  color: var(--white);
+  margin-top: 8px;
+}
+
+/* A slightly darker navy when the mouse hovers over the button. */
+.btn-primary:hover {
+  background-color: #0D2A52;
+}
+
+/* Overrides the full width, so the button sits at its natural size. */
+.btn-inline {
+  display: inline-block;
+  width: auto;
+}
+
+/* ---- 6. Confirmation page ---- */
+
+/* Centres the text inside the thank-you card. */
+.confirmation {
+  text-align: center;
+}
+
+/* Adds space above the "Send another message" link. */
+.confirmation .btn-inline {
+  margin-top: 16px;
+}
+
+/* ---- 7. Small screens (phones) ----
+   This block applies only when the screen is 480 pixels wide or narrower.
+   It reduces the padding and heading size so the content fits. */
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .form-card {
+    padding: 24px 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
