@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ prop['reference'] }}{% endblock %}
+{% block content %}
+<h1>{{ prop['reference'] }}</h1>
+<p>{{ prop['address'] }}</p>
+
+<section class="section">
+  <h2>Start draft inspection</h2>
+  <form method="post" action="{{ url_for('main.start_inspection', property_id=prop['id']) }}">
+    <label for="inspection_date">Inspection date</label>
+    <input id="inspection_date" name="inspection_date" type="date" required value="{{ values.get('inspection_date', '') }}">
+    {% if errors.get('inspection_date') %}<p class="error">{{ errors['inspection_date'] }}</p>{% endif %}
+
+    <label for="notes">Notes (optional, up to 1000 characters)</label>
+    <textarea id="notes" name="notes" rows="4">{{ values.get('notes', '') }}</textarea>
+    {% if errors.get('notes') %}<p class="error">{{ errors['notes'] }}</p>{% endif %}
+
+    <p><button type="submit">Start draft inspection</button></p>
+  </form>
+</section>
+
+<section class="section">
+  <h2>Inspections</h2>
+  {% if inspections %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Inspection date</th><th>Status</th><th>Created</th></tr>
+      </thead>
+      <tbody>
+        {% for i in inspections %}
+        <tr>
+          <td><a href="{{ url_for('main.show_inspection', inspection_id=i['id']) }}">{{ i['inspection_date'] }}</a></td>
+          <td>{{ i['status'] }}</td>
+          <td>{{ i['created_at'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>No inspections yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Inspection {{ inspection['inspection_date'] }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('main.show_property', property_id=inspection['property_id']) }}">&larr; {{ inspection['reference'] }}</a></p>
+
+<h1>Inspection on {{ inspection['inspection_date'] }}</h1>
+<p>{{ inspection['reference'] }}, {{ inspection['address'] }}</p>
+<p>Status: <strong>{{ inspection['status'] }}</strong></p>
+<p>Created: {{ inspection['created_at'] }}</p>
+
+<section class="section">
+  <h2>Notes</h2>
+  <p style="white-space: pre-wrap;">{{ inspection['notes'] or 'No notes.' }}</p>
+</section>
+
+<section class="section">
+  <h2>Change status</h2>
+  <form method="post" action="{{ url_for('main.change_status', inspection_id=inspection['id']) }}">
+    <label for="status">Status</label>
+    <select id="status" name="status">
+      {% for s in ('draft', 'complete') %}
+      <option value="{{ s }}" {% if s == inspection['status'] %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <p><button type="submit">Save status</button></p>
+  </form>
+</section>
+{% endblock %}

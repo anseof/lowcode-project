@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Properties{% endblock %}
+{% block content %}
+<h1>Properties</h1>
+<p><a class="button" href="{{ url_for('main.new_property') }}">Add property</a></p>
+
+{% if properties %}
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Reference</th><th>Address</th></tr>
+    </thead>
+    <tbody>
+      {% for p in properties %}
+      <tr>
+        <td><a href="{{ url_for('main.show_property', property_id=p['id']) }}">{{ p['reference'] }}</a></td>
+        <td>{{ p['address'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p>No properties yet.</p>
+{% endif %}
+{% endblock %}
